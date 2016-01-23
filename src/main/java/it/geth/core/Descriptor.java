@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package it.geth.core.utils;
+package it.geth.core;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,7 +14,7 @@ import java.util.Map;
  *
  * @author agrimandi
  */
-public class Yoda {
+public class Descriptor {
 
     private Map<String, String> params = new HashMap<>();
     private List<Class> annotatedClasses = new ArrayList<>();
@@ -24,7 +24,7 @@ public class Yoda {
      * @param params
      * @param annotatedClasses
      */
-    public Yoda(Map<String, String> params, List<Class> annotatedClasses) {
+    public Descriptor(Map<String, String> params, List<Class> annotatedClasses) {
         this.params = params;
         this.annotatedClasses = annotatedClasses;
     }

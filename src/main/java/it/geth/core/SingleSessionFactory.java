@@ -1,4 +1,4 @@
-package it.geth.core.utils;
+package it.geth.core;
 
 import java.util.Map;
 import org.hibernate.SessionFactory;
@@ -13,7 +13,7 @@ public class SingleSessionFactory {
 
         private static SessionFactory SESSION_FACTORY = null;
 
-        private static SessionFactory getSingleSession(Yoda yoda) {
+        private static SessionFactory getSingleSession(Descriptor yoda) {
 
             if (SESSION_FACTORY == null) {
                 Configuration hConf = new Configuration();
@@ -36,7 +36,7 @@ public class SingleSessionFactory {
         }
     }
 
-    public static SessionFactory getInstance(Yoda yoda) {
+    public static SessionFactory getInstance(Descriptor yoda) {
         return SingleSessionHelper.getSingleSession(yoda);
     }
 
