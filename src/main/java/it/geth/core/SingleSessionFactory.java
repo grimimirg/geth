@@ -13,16 +13,16 @@ public class SingleSessionFactory {
 
         private static SessionFactory SESSION_FACTORY = null;
 
-        private static SessionFactory getSingleSession(Descriptor yoda) {
+        private static SessionFactory getSingleSession(Descriptor databaseDescriptor) {
 
             if (SESSION_FACTORY == null) {
                 Configuration hConf = new Configuration();
 
-                for (Map.Entry<String, String> entry : yoda.getParams().entrySet()) {
+                for (Map.Entry<String, String> entry : databaseDescriptor.getParams().entrySet()) {
                     hConf.setProperty(entry.getKey(), entry.getValue());
                 }
 
-                for (Class annotatedClass : yoda.getAnnotatedClasses()) {
+                for (Class annotatedClass : databaseDescriptor.getAnnotatedClasses()) {
                     hConf.addAnnotatedClass(annotatedClass);
                 }
 
