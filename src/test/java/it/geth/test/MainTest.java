@@ -20,19 +20,7 @@ public class MainTest {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Descriptor descriptor = new Descriptor();
-        descriptor.addProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
-        descriptor.addProperty("hibernate.connection.driver_class", "org.postgresql.Driver");
-        descriptor.addProperty("hibernate.connection.url", "jdbc:postgresql://127.0.0.1:5432/postgres");
-        descriptor.addProperty("hibernate.connection.username", "postgres");
-        descriptor.addProperty("hibernate.connection.password", "tette123");
-        descriptor.addProperty("hibernate.current_session_context_class", "thread");
 
-        descriptor.addAnnotatedClass(Entity.class);
-
-        SessionFactory singleSessionFactory = SingleSessionFactory.getInstance(descriptor);
-        SessionFactory singleSessionFactory2 = SingleSessionFactory.getInstance();
-        System.out.println("halla halla");
     }
 
 }
