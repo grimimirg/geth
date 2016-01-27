@@ -7,6 +7,7 @@ package it.geth.test;
 
 import it.geth.core.DatabaseAdapter;
 import it.geth.core.config.Descriptor;
+import it.geth.core.config.annotation.BasePackage;
 import it.geth.core.config.annotation.ConfigurationAdapter;
 
 /**
@@ -14,6 +15,7 @@ import it.geth.core.config.annotation.ConfigurationAdapter;
  * @author agrimandi
  */
 @ConfigurationAdapter
+@BasePackage(basePackage = "it.geth.test")
 public class Configurations extends DatabaseAdapter {
 
     @Override

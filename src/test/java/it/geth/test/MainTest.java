@@ -5,6 +5,7 @@
  */
 package it.geth.test;
 
+import it.geth.core.AppDbContext;
 import it.geth.core.config.Descriptor;
 import it.geth.core.config.SingleSessionFactory;
 import org.hibernate.SessionFactory;
@@ -19,7 +20,7 @@ public class MainTest {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        AppDbContext app = AppDbContext.getInstance();
 
     }
 
