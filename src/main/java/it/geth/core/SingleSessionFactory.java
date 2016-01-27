@@ -13,21 +13,21 @@ public class SingleSessionFactory {
 
         private static SessionFactory SESSION_FACTORY = null;
 
-        private static SessionFactory getSingleSession(Descriptor databaseDescriptor) {
+        private static SessionFactory getSingleSession(Descriptor descriptor) {
 
             if (SESSION_FACTORY == null) {
-                Configuration hConf = new Configuration();
+                Configuration configuration = new Configuration();
 
-                for (Map.Entry<String, String> entry : databaseDescriptor.getParams().entrySet()) {
-                    hConf.setProperty(entry.getKey(), entry.getValue());
+                for (Map.Entry<String, String> entry : descriptor.getParams().entrySet()) {
+                    configuration.setProperty(entry.getKey(), entry.getValue());
                 }
 
-                for (Class annotatedClass : databaseDescriptor.getAnnotatedClasses()) {
-                    hConf.addAnnotatedClass(annotatedClass);
+                for (Class annotatedClass : descriptor.getAnnotatedClasses()) {
+                    configuration.addAnnotatedClass(annotatedClass);
                 }
 
                 try {
-                    SESSION_FACTORY = hConf.buildSessionFactory();
+                    SESSION_FACTORY = configuration.buildSessionFactory();
                 } catch (ExceptionInInitializerError ex) {
                     System.out.println(ex.getMessage());
                 }
@@ -36,8 +36,8 @@ public class SingleSessionFactory {
         }
     }
 
-    public static SessionFactory getInstance(Descriptor yoda) {
-        return SingleSessionHelper.getSingleSession(yoda);
+    public static SessionFactory getInstance(Descriptor descriptor) {
+        return SingleSessionHelper.getSingleSession(descriptor);
     }
 
 }

@@ -64,6 +64,7 @@ public class Descriptor {
 
     /**
      *
+     * @param key
      * @return
      */
     public Object getParam(String key) {
@@ -72,6 +73,7 @@ public class Descriptor {
 
     /**
      *
+     * @param index
      * @return
      */
     public Class getAnnotatedClass(int index) {
