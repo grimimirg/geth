@@ -5,7 +5,6 @@
  */
 package it.geth.core;
 
-import it.geth.core.config.SingleSessionFactory;
 import it.geth.core.config.annotation.ConfigurationAdapter;
 import it.geth.core.config.annotation.SessionFactoryBuilder;
 import java.lang.reflect.InvocationTargetException;
@@ -18,18 +17,23 @@ import org.reflections.Reflections;
  *
  * @author agrimandi
  */
-public class AppDbContext {
+public class ApplicationContext {
 
-    private AppDbContext() {
+    private ApplicationContext() {
     }
 
-    public static AppDbContext getInstance(String rootContext) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    public static ApplicationContext getInstance(String rootContext) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         return AppDbContextHolder.buildContext(rootContext);
     }
 
     private static class AppDbContextHolder {
 
-        private static AppDbContext buildContext(String rootContext) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        private static ApplicationContext buildContext(String rootContext) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+            buildSingleSessionFactory(rootContext);
+            return null;
+        }
+
+        private static void buildSingleSessionFactory(String rootContext) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException {
             Reflections rootSCope = new Reflections(rootContext);
             Set<Class<?>> adapters = rootSCope.getTypesAnnotatedWith(ConfigurationAdapter.class);
 
@@ -46,7 +50,6 @@ public class AppDbContext {
                     }
                 }
             }
-            return null;
         }
     }
 }
