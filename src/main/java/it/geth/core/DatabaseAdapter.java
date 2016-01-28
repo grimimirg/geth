@@ -15,21 +15,21 @@ import it.geth.core.config.annotation.SessionFactoryBuilder;
  */
 public abstract class DatabaseAdapter {
 
-    private Descriptor descriptor = null;
+    private Descriptor descriptor = new Descriptor();
 
     /**
      *
      * @param descriptor
      */
     public void configureDatabaseAdapter(Descriptor descriptor) {
-        
+
     }
 
     /**
      *
      */
     @SessionFactoryBuilder
-    private void buildSessionFactory() {
+    public void buildSessionFactory() {
         this.configureDatabaseAdapter(this.descriptor);
         SingleSessionFactory.getInstance(this.descriptor);
     }

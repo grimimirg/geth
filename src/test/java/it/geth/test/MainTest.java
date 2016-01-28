@@ -6,8 +6,8 @@
 package it.geth.test;
 
 import it.geth.core.AppDbContext;
-import it.geth.core.config.Descriptor;
 import it.geth.core.config.SingleSessionFactory;
+import java.lang.reflect.InvocationTargetException;
 import org.hibernate.SessionFactory;
 
 /**
@@ -18,9 +18,13 @@ public class MainTest {
 
     /**
      * @param args the command line arguments
+     * @throws java.lang.InstantiationException
+     * @throws java.lang.IllegalAccessException
      */
-    public static void main(String[] args) {
-        AppDbContext app = AppDbContext.getInstance();
+    public static void main(String[] args) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        AppDbContext app = AppDbContext.getInstance("it.geth.test");
+
+        SessionFactory sf = SingleSessionFactory.getInstance();
 
     }
 
