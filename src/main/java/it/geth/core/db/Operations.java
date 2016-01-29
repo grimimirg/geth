@@ -5,16 +5,13 @@
  */
 package it.geth.core.db;
 
-import it.geth.core.ApplicationContext;
 import it.geth.core.SingleSessionFactory;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Iterator;
-import java.util.Set;
 import javax.persistence.Column;
-import org.hibernate.Query;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.reflections.Reflections;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -31,21 +28,22 @@ public class Operations implements OperationDao {
     public Outcome loadFromDb(Object toLoad) throws IllegalArgumentException, InvocationTargetException, IllegalAccessException {
         Session session = SingleSessionFactory.getInstance().getCurrentSession();
         session.beginTransaction();
-        Query query = session.createQuery("from " + toLoad.getClass().getSimpleName());
 
-        Reflections reflections = new Reflections(ApplicationContext.rootContext());
-        Set<Method> annotatedMethods = reflections.getMethodsAnnotatedWith(Column.class);//errooooooooooooooor
+        Criteria criteria = session.createCriteria(toLoad.getClass());
 
-        Iterator<Method> iteratorAnnotatedMethods = annotatedMethods.iterator();
+        Method[] methods = toLoad.getClass().getMethods();
 
-        while (iteratorAnnotatedMethods.hasNext()) {
-            Method currentMethod = iteratorAnnotatedMethods.next();
-            Column values = currentMethod.getAnnotation(Column.class);
-
-            query.setParameter(values.name(), currentMethod.invoke(toLoad, null));
+        for (Method method : methods) {
+            if (method.isAnnotationPresent(Column.class)) {
+                Column column = method.getAnnotation(Column.class);
+                Object value = method.invoke(toLoad, null);
+                if (value != null) {
+                    criteria.add(Restrictions.eq(column.name(), value));
+                }
+            }
         }
 
-        return new Outcome(query.list());
+        return new Outcome(criteria.list());
     }
 
 }

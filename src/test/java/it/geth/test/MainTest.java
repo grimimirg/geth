@@ -24,8 +24,9 @@ public class MainTest {
     public static void main(String[] args) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         ApplicationContext app = ApplicationContext.getInstance("it.geth.test");
         User user = new User();
-        user.setId(1);
+        user.setUsername("a");
         String json = new Operations().loadFromDb(user).toJson();
+        System.out.println(json);
     }
 
 }
