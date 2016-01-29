@@ -6,7 +6,14 @@
 package it.geth.core.db;
 
 import it.geth.core.SingleSessionFactory;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Iterator;
+import java.util.Set;
+import javax.persistence.Column;
+import org.hibernate.Query;
 import org.hibernate.Session;
+import org.reflections.Reflections;
 
 /**
  *
@@ -14,14 +21,30 @@ import org.hibernate.Session;
  */
 public class Operations implements OperationDao {
 
-    public boolean saveToDb() {
+    @Override
+    public boolean saveToDb(Object toSave) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public Outcome loadFromDb(Object toLoad) {
+    @Override
+    public Outcome loadFromDb(Object toLoad) throws IllegalArgumentException, InvocationTargetException, IllegalAccessException {
         Session session = SingleSessionFactory.getInstance().getCurrentSession();
         session.beginTransaction();
-        return new Outcome(session.createQuery("from " + toLoad.getClass().getSimpleName()).list());
+        Query query = session.createQuery("from " + toLoad.getClass().getSimpleName());
+
+        Reflections reflections = new Reflections();
+        Set<Method> annotatedMethods = reflections.getMethodsAnnotatedWith(Column.class);
+
+        Iterator<Method> iteratorAnnotatedMethods = annotatedMethods.iterator();
+
+        while (iteratorAnnotatedMethods.hasNext()) {
+            Method currentMethod = iteratorAnnotatedMethods.next();
+            Column values = currentMethod.getAnnotation(Column.class);
+
+            query.setParameter(values.name(), currentMethod.invoke(toLoad, null));
+        }
+
+        return new Outcome(query.list());
     }
 
 }

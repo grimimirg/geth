@@ -34,8 +34,8 @@ public class ApplicationContext {
         }
 
         private static void buildSingleSessionFactory(String rootContext) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException {
-            Reflections rootSCope = new Reflections(rootContext);
-            Set<Class<?>> adapters = rootSCope.getTypesAnnotatedWith(ConfigurationAdapter.class);
+            Reflections rootScope = new Reflections(rootContext);
+            Set<Class<?>> adapters = rootScope.getTypesAnnotatedWith(ConfigurationAdapter.class);
 
             Iterator iAdapter = adapters.iterator();
 

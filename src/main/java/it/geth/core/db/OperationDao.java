@@ -5,6 +5,7 @@
  */
 package it.geth.core.db;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 /**
@@ -13,8 +14,9 @@ import java.util.List;
  */
 public interface OperationDao {
 
-    public boolean saveToDb();
+    public boolean saveToDb(Object toSave);
 
-    public Outcome loadFromDb(Object toLoad);
+    public Outcome loadFromDb(Object toLoad) throws IllegalArgumentException, InvocationTargetException, IllegalAccessException;
+;
 
 }

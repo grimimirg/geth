@@ -7,7 +7,6 @@ package it.geth.test;
 
 import it.geth.core.DatabaseAdapter;
 import it.geth.core.config.Descriptor;
-import it.geth.core.config.annotation.BasePackage;
 import it.geth.core.config.annotation.ConfigurationAdapter;
 
 /**
@@ -15,7 +14,6 @@ import it.geth.core.config.annotation.ConfigurationAdapter;
  * @author agrimandi
  */
 @ConfigurationAdapter
-@BasePackage(basePackage = "it.geth.test")
 public class Configurations extends DatabaseAdapter {
 
     @Override
@@ -27,7 +25,7 @@ public class Configurations extends DatabaseAdapter {
         descriptor.addProperty("hibernate.connection.password", "tette123");
         descriptor.addProperty("hibernate.current_session_context_class", "thread");
 
-        descriptor.addAnnotatedClass(Entity.class);
+        descriptor.addAnnotatedClass(User.class);
     }
 
 }

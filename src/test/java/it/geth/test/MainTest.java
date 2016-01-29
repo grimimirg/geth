@@ -23,7 +23,8 @@ public class MainTest {
      */
     public static void main(String[] args) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         ApplicationContext app = ApplicationContext.getInstance("it.geth.test");
-        String json = new Operations().loadFromDb(null).toJson();
+        User user = new User();
+        String json = new Operations().loadFromDb(user).toJson();
     }
 
 }
