@@ -11,6 +11,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.reflections.Reflections;
 
 /**
@@ -19,27 +21,20 @@ import org.reflections.Reflections;
  */
 public class ApplicationContext {
 
-    private ApplicationContext() {
-    }
+    private static ApplicationContext appContext = null;
 
-    public static ApplicationContext getInstance(String rootContext) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        return AppDbContextHolder.buildContext(rootContext);
-    }
+    private static String rootContext = null;
 
-    private static class AppDbContextHolder {
+    protected ApplicationContext(String rootContext) {
+        ApplicationContext.rootContext = rootContext;
 
-        private static ApplicationContext buildContext(String rootContext) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-            buildSingleSessionFactory(rootContext);
-            return null;
-        }
+        Reflections rootScope = new Reflections(ApplicationContext.rootContext);
+        Set<Class<?>> adapters = rootScope.getTypesAnnotatedWith(ConfigurationAdapter.class);
 
-        private static void buildSingleSessionFactory(String rootContext) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException {
-            Reflections rootScope = new Reflections(rootContext);
-            Set<Class<?>> adapters = rootScope.getTypesAnnotatedWith(ConfigurationAdapter.class);
+        Iterator iAdapter = adapters.iterator();
 
-            Iterator iAdapter = adapters.iterator();
-
-            while (iAdapter.hasNext()) {
+        while (iAdapter.hasNext()) {
+            try {
                 Class databaseAdapterClass = (Class) iAdapter.next();
                 Object configurationAdapter = databaseAdapterClass.newInstance();
 
@@ -49,7 +44,31 @@ public class ApplicationContext {
                         method.invoke(configurationAdapter, null);
                     }
                 }
+            } catch (InstantiationException ex) {
+                Logger.getLogger(ApplicationContext.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(ApplicationContext.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalArgumentException ex) {
+                Logger.getLogger(ApplicationContext.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InvocationTargetException ex) {
+                Logger.getLogger(ApplicationContext.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
+
+    public static String rootContext() {
+        return ApplicationContext.rootContext;
+    }
+
+    public static ApplicationContext getInstance() {
+        return appContext;
+    }
+
+    public static ApplicationContext getInstance(String rootContext) {
+        if (appContext == null) {
+            appContext = new ApplicationContext(rootContext);
+        }
+        return appContext;
+    }
+
 }

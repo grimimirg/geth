@@ -5,6 +5,7 @@
  */
 package it.geth.core.db;
 
+import it.geth.core.ApplicationContext;
 import it.geth.core.SingleSessionFactory;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -32,8 +33,8 @@ public class Operations implements OperationDao {
         session.beginTransaction();
         Query query = session.createQuery("from " + toLoad.getClass().getSimpleName());
 
-        Reflections reflections = new Reflections();
-        Set<Method> annotatedMethods = reflections.getMethodsAnnotatedWith(Column.class);
+        Reflections reflections = new Reflections(ApplicationContext.rootContext());
+        Set<Method> annotatedMethods = reflections.getMethodsAnnotatedWith(Column.class);//errooooooooooooooor
 
         Iterator<Method> iteratorAnnotatedMethods = annotatedMethods.iterator();
 

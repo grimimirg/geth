@@ -5,6 +5,8 @@
  */
 package it.geth.core.db;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.util.List;
 
 /**
@@ -19,18 +21,17 @@ public class Outcome {
 
     }
 
+    public void setResult(List result) {
+        this.result = result;
+    }
+
     public Outcome(List result) {
         this.result = result;
     }
 
     public String toJson() {
-        //convert list to json
-        return null;
-    }
-
-    public String toXml() {
-        //convert list to json
-        return null;
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        return gson.toJson(this.result);
     }
 
     public List toList() {
