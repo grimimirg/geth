@@ -6,7 +6,6 @@
 package it.geth.core;
 
 import it.geth.core.config.Descriptor;
-import it.geth.core.config.SingleSessionFactory;
 import it.geth.core.config.annotation.SessionFactoryBuilder;
 
 /**

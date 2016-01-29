@@ -6,6 +6,8 @@
 package it.geth.test;
 
 import it.geth.core.ApplicationContext;
+import it.geth.core.db.OperationDao;
+import it.geth.core.db.Operations;
 import java.lang.reflect.InvocationTargetException;
 
 /**
@@ -21,7 +23,7 @@ public class MainTest {
      */
     public static void main(String[] args) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         ApplicationContext app = ApplicationContext.getInstance("it.geth.test");
-
+        String json = new Operations().loadFromDb(null).toJson();
     }
 
 }
