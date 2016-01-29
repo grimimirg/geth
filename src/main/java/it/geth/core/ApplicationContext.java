@@ -34,23 +34,19 @@ public class ApplicationContext {
         Iterator iAdapter = adapters.iterator();
 
         while (iAdapter.hasNext()) {
+
             try {
                 Class databaseAdapterClass = (Class) iAdapter.next();
                 Object configurationAdapter = databaseAdapterClass.newInstance();
-
                 Method[] databaseAdapterMethods = databaseAdapterClass.getMethods();
+
                 for (Method method : databaseAdapterMethods) {
                     if (method.isAnnotationPresent(SessionFactoryBuilder.class)) {
                         method.invoke(configurationAdapter, null);
                     }
                 }
-            } catch (InstantiationException ex) {
-                Logger.getLogger(ApplicationContext.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalAccessException ex) {
-                Logger.getLogger(ApplicationContext.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalArgumentException ex) {
-                Logger.getLogger(ApplicationContext.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (InvocationTargetException ex) {
+
+            } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
                 Logger.getLogger(ApplicationContext.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -64,7 +60,7 @@ public class ApplicationContext {
         return appContext;
     }
 
-    public static ApplicationContext getInstance(String rootContext) {
+    public static ApplicationContext buildContext(String rootContext) {
         if (appContext == null) {
             appContext = new ApplicationContext(rootContext);
         }

@@ -14,9 +14,10 @@ import java.util.List;
  */
 public interface OperationDao {
 
-    public boolean saveToDb(Object toSave);
+    public boolean save(Object toSave);
 
-    public Outcome loadFromDb(Object toLoad) throws IllegalArgumentException, InvocationTargetException, IllegalAccessException;
-;
+    public Outcome load(Object toLoad) throws IllegalArgumentException, InvocationTargetException, IllegalAccessException;
+    
+    public Outcome loadById(Object toLoad) throws IllegalArgumentException, InvocationTargetException, IllegalAccessException;
 
 }
