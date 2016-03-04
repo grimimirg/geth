@@ -14,10 +14,12 @@ import it.geth.core.config.annotation.ConfigurationAdapter;
  * @author agrimandi
  */
 @ConfigurationAdapter
-public class Configurations extends DatabaseAdapter {
+public class Configurations extends DatabaseAdapter
+{
 
     @Override
-    public void configureDatabaseAdapter(Descriptor descriptor) {
+    public void configureDatabaseAdapter(Descriptor descriptor)
+    {
         descriptor.addProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
         descriptor.addProperty("hibernate.connection.driver_class", "org.postgresql.Driver");
         descriptor.addProperty("hibernate.connection.url", "jdbc:postgresql://127.0.0.1:5432/postgres");

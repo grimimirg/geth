@@ -27,7 +27,6 @@ public class MainTest {
         user.setUsername("a");
         String json = new Operations().load(user).toJson();
         System.out.println(json);
-        //hallah
     }
 
 }

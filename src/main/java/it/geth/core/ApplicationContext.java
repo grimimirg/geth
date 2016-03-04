@@ -52,7 +52,11 @@ public class ApplicationContext {
         }
     }
 
-    public static String rootContext() {
+    public void startServer() {
+        
+    }
+
+    public static String getRootContext() {
         return ApplicationContext.rootContext;
     }
 

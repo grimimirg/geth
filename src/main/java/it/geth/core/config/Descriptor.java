@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,6 +20,7 @@ public class Descriptor {
 
     private Map<String, String> params = new HashMap<>();
     private List<Class> annotatedClasses = new ArrayList<>();
+    private List<Class> modules = new ArrayList<>();
 
     /**
      *
@@ -84,6 +87,42 @@ public class Descriptor {
      */
     public Class getAnnotatedClass(int index) {
         return annotatedClasses.get(index);
+    }
+
+    /**
+     *
+     * @return
+     */
+    public List<Class> getModules() {
+        return modules;
+    }
+
+    /**
+     *
+     * @param modules
+     */
+    public void setModules(List<Class> modules) {
+        this.modules = modules;
+    }
+
+    /**
+     * 
+     * @param cls 
+     */
+    public void addModule(Class cls) {
+        this.modules.add(cls);
+    }
+
+    /**
+     * 
+     * @param cls 
+     */
+    public void addModule(String cls) {
+        try {
+            this.modules.add(Class.forName(cls));
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Descriptor.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }
