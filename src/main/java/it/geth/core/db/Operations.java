@@ -22,6 +22,7 @@ public class Operations implements OperationDao {
 
     @Override
     public boolean save(Object toSave) {
+        //cacca
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
