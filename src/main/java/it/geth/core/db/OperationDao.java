@@ -6,7 +6,7 @@
 package it.geth.core.db;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.List;
+import org.hibernate.HibernateException;
 
 /**
  *
@@ -14,10 +14,10 @@ import java.util.List;
  */
 public interface OperationDao {
 
-    public boolean save(Object toSave);
+    public void save(Object toSave) throws HibernateException;
 
     public Outcome load(Object toLoad) throws IllegalArgumentException, InvocationTargetException, IllegalAccessException;
-    
+
     public Outcome loadById(Object toLoad) throws IllegalArgumentException, InvocationTargetException, IllegalAccessException;
 
 }
