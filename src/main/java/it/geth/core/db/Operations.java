@@ -12,16 +12,16 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 /**
  *
  * @author agrimandi
  */
-public class Operations implements OperationDao {
+public class Operations implements OperationDao
+{
 
-    private final Session session = SingleSessionFactory.getInstance().getCurrentSession();
+    private final DelegateSession session = new DelegateSession(SingleSessionFactory.getInstance().getCurrentSession());
 
     /**
      * Save an object into the database using the <b>toSave.getClass()</b> as
@@ -33,7 +33,8 @@ public class Operations implements OperationDao {
      * @param toSave
      */
     @Override
-    public void save(Object toSave) throws HibernateException {
+    public void save(Object toSave) throws HibernateException
+    {
         this.session.beginTransaction();
         this.session.save(toSave);
         this.session.getTransaction().commit();
@@ -54,18 +55,22 @@ public class Operations implements OperationDao {
      * @throws IllegalAccessException
      */
     @Override
-    public Outcome load(Object toLoad) throws IllegalArgumentException, InvocationTargetException, IllegalAccessException {
+    public Outcome load(Object toLoad) throws IllegalArgumentException, InvocationTargetException, IllegalAccessException
+    {
         this.session.beginTransaction();
 
         Criteria criteria = this.session.createCriteria(toLoad.getClass());
 
         Method[] methods = toLoad.getClass().getMethods();
 
-        for (Method method : methods) {
-            if (method.isAnnotationPresent(Column.class) && !method.isAnnotationPresent(Id.class)) {
+        for (Method method : methods)
+        {
+            if (method.isAnnotationPresent(Column.class) && !method.isAnnotationPresent(Id.class))
+            {
                 Column column = method.getAnnotation(Column.class);
                 Object value = method.invoke(toLoad, (Object[]) null);
-                if (value != null) {
+                if (value != null)
+                {
                     criteria.add(Restrictions.eq(column.name(), value));
                 }
             }
@@ -89,18 +94,22 @@ public class Operations implements OperationDao {
      * @throws IllegalAccessException
      */
     @Override
-    public Outcome loadById(Object toLoad) throws IllegalArgumentException, InvocationTargetException, IllegalAccessException {
+    public Outcome loadById(Object toLoad) throws IllegalArgumentException, InvocationTargetException, IllegalAccessException
+    {
         this.session.beginTransaction();
 
         Criteria criteria = this.session.createCriteria(toLoad.getClass());
 
         Method[] methods = toLoad.getClass().getMethods();
 
-        for (Method method : methods) {
-            if (method.isAnnotationPresent(Id.class)) {
+        for (Method method : methods)
+        {
+            if (method.isAnnotationPresent(Id.class))
+            {
                 Column column = method.getAnnotation(Column.class);
                 Object value = method.invoke(toLoad, (Object[]) null);
-                if (value != null) {
+                if (value != null)
+                {
                     criteria.add(Restrictions.eq(column.name(), value));
                 }
             }

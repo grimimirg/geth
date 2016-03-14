@@ -26,6 +26,8 @@ public class Configurations extends DatabaseAdapter
         descriptor.addProperty("hibernate.connection.username", "postgres");
         descriptor.addProperty("hibernate.connection.password", "tette123");
         descriptor.addProperty("hibernate.current_session_context_class", "thread");
+        descriptor.addProperty("show_sql", "true");
+        descriptor.addProperty("format_sql", "true");
 
         descriptor.addAnnotatedClass(User.class);
     }

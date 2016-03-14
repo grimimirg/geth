@@ -12,20 +12,24 @@ import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 import org.reflections.Reflections;
 
 /**
  *
  * @author agrimandi
  */
-public class ApplicationContext {
+public class ApplicationContext
+{
+
+    final static Logger logger = null;
 
     private static ApplicationContext appContext = null;
 
     private static String rootContext = null;
 
-    protected ApplicationContext(String rootContext) {
+    protected ApplicationContext(String rootContext)
+    {
         ApplicationContext.rootContext = rootContext;
 
         Reflections rootScope = new Reflections(ApplicationContext.rootContext);
@@ -33,39 +37,54 @@ public class ApplicationContext {
 
         Iterator iAdapter = adapters.iterator();
 
-        while (iAdapter.hasNext()) {
+        while (iAdapter.hasNext())
+        {
 
-            try {
+            try
+            {
                 Class databaseAdapterClass = (Class) iAdapter.next();
                 Object configurationAdapter = databaseAdapterClass.newInstance();
                 Method[] databaseAdapterMethods = databaseAdapterClass.getMethods();
 
-                for (Method method : databaseAdapterMethods) {
-                    if (method.isAnnotationPresent(SessionFactoryBuilder.class)) {
+                for (Method method : databaseAdapterMethods)
+                {
+                    if (method.isAnnotationPresent(SessionFactoryBuilder.class))
+                    {
                         method.invoke(configurationAdapter, null);
                     }
                 }
 
-            } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-                Logger.getLogger(ApplicationContext.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex)
+            {
+                //Logger.getLogger(ApplicationContext.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
 
-    public void startServer() {
-        
+    public void startServer()
+    {
+
     }
 
-    public static String getRootContext() {
+    public Logger getLogger()
+    {
+        return null;
+    }
+
+    public static String getRootContext()
+    {
         return ApplicationContext.rootContext;
     }
 
-    public static ApplicationContext getInstance() {
+    public static ApplicationContext getInstance()
+    {
         return appContext;
     }
 
-    public static ApplicationContext buildContext(String rootContext) {
-        if (appContext == null) {
+    public static ApplicationContext buildContext(String rootContext)
+    {
+        if (appContext == null)
+        {
             appContext = new ApplicationContext(rootContext);
         }
         return appContext;
