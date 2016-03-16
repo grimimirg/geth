@@ -16,7 +16,8 @@ import java.util.logging.Logger;
  *
  * @author agrimandi
  */
-public class Descriptor {
+public class Descriptor
+{
 
     private Map<String, String> params = new HashMap<>();
     private List<Class> annotatedClasses = new ArrayList<>();
@@ -25,7 +26,8 @@ public class Descriptor {
     /**
      *
      */
-    public Descriptor() {
+    public Descriptor()
+    {
     }
 
     /**
@@ -33,7 +35,8 @@ public class Descriptor {
      * @param params
      * @param annotatedClasses
      */
-    public Descriptor(Map<String, String> params, List<Class> annotatedClasses) {
+    public Descriptor(Map<String, String> params, List<Class> annotatedClasses)
+    {
         this.params = params;
         this.annotatedClasses = annotatedClasses;
     }
@@ -43,7 +46,8 @@ public class Descriptor {
      * @param key
      * @param value
      */
-    public void addProperty(String key, String value) {
+    public void addProperty(String key, String value)
+    {
         this.params.put(key, value);
     }
 
@@ -51,7 +55,8 @@ public class Descriptor {
      *
      * @param cls
      */
-    public void addAnnotatedClass(Class cls) {
+    public void addAnnotatedClass(Class cls)
+    {
         this.annotatedClasses.add(cls);
     }
 
@@ -59,7 +64,8 @@ public class Descriptor {
      *
      * @return
      */
-    public Map<String, String> getParams() {
+    public Map<String, String> getParams()
+    {
         return params;
     }
 
@@ -67,7 +73,8 @@ public class Descriptor {
      *
      * @return
      */
-    public List<Class> getAnnotatedClasses() {
+    public List<Class> getAnnotatedClasses()
+    {
         return annotatedClasses;
     }
 
@@ -76,7 +83,8 @@ public class Descriptor {
      * @param key
      * @return
      */
-    public Object getParam(String key) {
+    public Object getParam(String key)
+    {
         return params.get(key);
     }
 
@@ -85,7 +93,8 @@ public class Descriptor {
      * @param index
      * @return
      */
-    public Class getAnnotatedClass(int index) {
+    public Class getAnnotatedClass(int index)
+    {
         return annotatedClasses.get(index);
     }
 
@@ -93,7 +102,8 @@ public class Descriptor {
      *
      * @return
      */
-    public List<Class> getModules() {
+    public List<Class> getModules()
+    {
         return modules;
     }
 
@@ -101,26 +111,31 @@ public class Descriptor {
      *
      * @param modules
      */
-    public void setModules(List<Class> modules) {
+    public void setModules(List<Class> modules)
+    {
         this.modules = modules;
     }
 
     /**
-     * 
-     * @param cls 
+     *
+     * @param cls
      */
-    public void addModule(Class cls) {
+    public void addModule(Class cls)
+    {
         this.modules.add(cls);
     }
 
     /**
-     * 
-     * @param cls 
+     *
+     * @param cls
      */
-    public void addModule(String cls) {
-        try {
+    public void addModule(String cls)
+    {
+        try
+        {
             this.modules.add(Class.forName(cls));
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException ex)
+        {
             Logger.getLogger(Descriptor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

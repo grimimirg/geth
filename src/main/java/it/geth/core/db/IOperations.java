@@ -12,9 +12,10 @@ import org.hibernate.HibernateException;
  *
  * @author agrimandi
  */
-public interface OperationDao {
+public interface IOperations
+{
 
-    public void save(Object toSave) throws HibernateException;
+    public boolean save(Object toSave) throws HibernateException;
 
     public Outcome load(Object toLoad) throws IllegalArgumentException, InvocationTargetException, IllegalAccessException;
 

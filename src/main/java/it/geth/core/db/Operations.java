@@ -18,9 +18,12 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author agrimandi
  */
-public class Operations implements OperationDao
+public class Operations implements IOperations
 {
 
+    /**
+     *
+     */
     private final DelegateSession session = new DelegateSession(SingleSessionFactory.getInstance().getCurrentSession());
 
     /**
@@ -31,13 +34,22 @@ public class Operations implements OperationDao
      * <b>javax.persistence</b> annotation framework.
      *
      * @param toSave
+     * @return
      */
     @Override
-    public void save(Object toSave) throws HibernateException
+    public boolean save(Object toSave) throws HibernateException
     {
-        this.session.beginTransaction();
-        this.session.save(toSave);
-        this.session.getTransaction().commit();
+        try
+        {
+            this.session.beginTransaction();
+            this.session.save(toSave);
+            this.session.getTransaction().commit();
+            return true;
+        } catch (HibernateException ex)
+        {
+            ex.printStackTrace();
+            return false;
+        }
     }
 
     /**

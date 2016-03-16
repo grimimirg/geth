@@ -7,7 +7,6 @@ package it.geth.core.db;
 
 import java.io.Serializable;
 import java.sql.Connection;
-import org.apache.log4j.Logger;
 import org.hibernate.CacheMode;
 import org.hibernate.Criteria;
 import org.hibernate.EntityMode;
@@ -34,8 +33,6 @@ import org.hibernate.stat.SessionStatistics;
  */
 public class DelegateSession
 {
-
-    final static Logger logger = Logger.getLogger(DelegateSession.class);
 
     private Session session;
 

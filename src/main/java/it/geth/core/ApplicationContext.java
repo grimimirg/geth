@@ -11,8 +11,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.Set;
-import java.util.logging.Level;
-import org.apache.log4j.Logger;
 import org.reflections.Reflections;
 
 /**
@@ -22,12 +20,20 @@ import org.reflections.Reflections;
 public class ApplicationContext
 {
 
-    final static Logger logger = null;
-
+    /**
+     *
+     */
     private static ApplicationContext appContext = null;
 
+    /**
+     *
+     */
     private static String rootContext = null;
 
+    /**
+     *
+     * @param rootContext
+     */
     protected ApplicationContext(String rootContext)
     {
         ApplicationContext.rootContext = rootContext;
@@ -39,7 +45,6 @@ public class ApplicationContext
 
         while (iAdapter.hasNext())
         {
-
             try
             {
                 Class databaseAdapterClass = (Class) iAdapter.next();
@@ -56,31 +61,40 @@ public class ApplicationContext
 
             } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex)
             {
-                //Logger.getLogger(ApplicationContext.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
         }
     }
 
-    public void startServer()
-    {
-
-    }
-
-    public Logger getLogger()
-    {
-        return null;
-    }
-
+    /**
+     * Return the root package set during the first call of
+     * <b>buildContext()</b>
+     *
+     * @return
+     */
     public static String getRootContext()
     {
         return ApplicationContext.rootContext;
     }
 
+    /**
+     * Return the current application context instance.
+     *
+     * @return
+     */
     public static ApplicationContext getInstance()
     {
         return appContext;
     }
 
+    /**
+     * Univocally builds the main scope and tells Geth where to look for his
+     * configurations within a root package and build a Hibernate session to the
+     * database.
+     *
+     * @param rootContext
+     * @return
+     */
     public static ApplicationContext buildContext(String rootContext)
     {
         if (appContext == null)
