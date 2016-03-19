@@ -16,7 +16,7 @@ import it.grimi.modularserver.core.ModularServer;
 public abstract class MainAdapter
 {
 
-    private Descriptor descriptor = new Descriptor();
+    private final Descriptor descriptor = new Descriptor();
 
     /**
      *

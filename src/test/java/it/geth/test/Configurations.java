@@ -30,6 +30,10 @@ public class Configurations extends MainAdapter
         descriptor.addProperty("format_sql", "true");
 
         descriptor.addAnnotatedClass(User.class);
+
+        descriptor.setSocket(60001);
+
+        descriptor.addModule(AwesomeThings.class.getName());
     }
 
 }
