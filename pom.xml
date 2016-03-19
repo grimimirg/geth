@@ -45,6 +45,16 @@
             <scope>compile</scope>
         </dependency>
         
+        <!-- http server -->
+
+        <dependency>
+            <artifactId>it.grimi.modularserver</artifactId>
+            <groupId>ModularServer</groupId>
+            <scope>system</scope>
+            <version>1.0</version>
+            <systemPath>/home/agrimandi/Desktop/projects/lib/ModularServer-1.0.jar</systemPath>
+        </dependency>
+        
         <!-- TEST -->
         
         <!-- postgres -->

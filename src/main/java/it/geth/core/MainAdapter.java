@@ -7,6 +7,7 @@ package it.geth.core;
 
 import it.geth.core.config.Descriptor;
 import it.geth.core.config.annotation.Configurations;
+import it.grimi.modularserver.core.ModularServer;
 
 /**
  *
@@ -39,7 +40,7 @@ public abstract class MainAdapter
      */
     private void httpServer()
     {
-
+        new ModularServer(this.descriptor.getSocket()).start(this.descriptor.getModules());
     }
 
     /**
