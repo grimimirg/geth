@@ -22,6 +22,7 @@ public class Descriptor
     private Map<String, String> params = new HashMap<>();
     private List<Class> annotatedClasses = new ArrayList<>();
     private List<Class> modules = new ArrayList<>();
+    private int socket = 60001;
 
     /**
      *
@@ -127,15 +128,31 @@ public class Descriptor
 
     /**
      *
+     * @return
+     */
+    public int getSocket()
+    {
+        return socket;
+    }
+
+    /**
+     *
+     * @param socket
+     */
+    public void setSocket(int socket)
+    {
+        this.socket = socket;
+    }
+
+    /**
+     *
      * @param cls
      */
     public void addModule(String cls)
     {
-        try
-        {
+        try {
             this.modules.add(Class.forName(cls));
-        } catch (ClassNotFoundException ex)
-        {
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(Descriptor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

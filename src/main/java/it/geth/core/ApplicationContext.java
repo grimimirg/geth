@@ -6,12 +6,12 @@
 package it.geth.core;
 
 import it.geth.core.config.annotation.ConfigurationAdapter;
-import it.geth.core.config.annotation.SessionFactoryBuilder;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.Set;
 import org.reflections.Reflections;
+import it.geth.core.config.annotation.Configurations;
 
 /**
  *
@@ -53,7 +53,7 @@ public class ApplicationContext
 
                 for (Method method : databaseAdapterMethods)
                 {
-                    if (method.isAnnotationPresent(SessionFactoryBuilder.class))
+                    if (method.isAnnotationPresent(Configurations.class))
                     {
                         method.invoke(configurationAdapter, null);
                     }

@@ -6,13 +6,13 @@
 package it.geth.core;
 
 import it.geth.core.config.Descriptor;
-import it.geth.core.config.annotation.SessionFactoryBuilder;
+import it.geth.core.config.annotation.Configurations;
 
 /**
  *
  * @author agrimandi
  */
-public abstract class DatabaseAdapter
+public abstract class MainAdapter
 {
 
     private Descriptor descriptor = new Descriptor();
@@ -29,10 +29,27 @@ public abstract class DatabaseAdapter
     /**
      *
      */
-    @SessionFactoryBuilder
-    public void buildSessionFactory()
+    private void sessionFactory()
+    {
+        SingleSessionFactory.getInstance(this.descriptor);
+    }
+
+    /**
+     *
+     */
+    private void httpServer()
+    {
+
+    }
+
+    /**
+     *
+     */
+    @Configurations
+    public void sessionFactoryBuilder()
     {
         this.configureDatabaseAdapter(this.descriptor);
-        SingleSessionFactory.getInstance(this.descriptor);
+        this.sessionFactory();
+        this.httpServer();
     }
 }
