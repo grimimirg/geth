@@ -24,7 +24,7 @@ public class Operations implements IOperations
     /**
      *
      */
-    private final DelegateSession session = new DelegateSession(SingleSessionFactory.getInstance().getCurrentSession());
+    private final DelegateSession session = new DelegateSession(SingleSessionFactory.getCurrentInstance().getCurrentSession());
 
     /**
      * Save an object into the database using the <b>toSave.getClass()</b> as

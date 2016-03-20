@@ -41,11 +41,11 @@ public class SingleSessionFactory {
         }
     }
 
-    public static SessionFactory getInstance(Descriptor descriptor) {
+    public static SessionFactory buildInstance(Descriptor descriptor) {
         return SingleSessionHelper.build(descriptor);
     }
 
-    public static SessionFactory getInstance() {
+    public static SessionFactory getCurrentInstance() {
         return SingleSessionHelper.getSession();
     }
 

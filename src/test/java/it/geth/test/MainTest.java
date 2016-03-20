@@ -24,24 +24,25 @@ public class MainTest
      */
     public static void main(String[] args) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException
     {
-        ApplicationContext app = ApplicationContext.buildContext("it.geth.test");
-//        User user = new User();
-//        user.setUsername("ffrosky");
-//        String json = new Operations().load(user).toJson();
-//        System.out.println(json);
+        ApplicationContext.buildContext("it.geth.test");
 
-        User toInsert = new User();
-        toInsert.setName("pipitou");
-        toInsert.setSurname("ciffoli");
-        toInsert.setUsername("pciffoli");
-        toInsert.setPassword("123456");
+        User user = new User();
+        user.setUsername("ffrosky");
+        String json = new Operations().load(user).toJson();
+        System.out.println(json);
 
-        if (new Operations().save(toInsert))
-        {
-            System.out.println("Ok");
-        } else
-        {
-            System.out.println("Nok");
-        }
+//        User toInsert = new User();
+//        toInsert.setName("pipitou");
+//        toInsert.setSurname("ciffoli");
+//        toInsert.setUsername("pciffoli");
+//        toInsert.setPassword("123456");
+//
+//        if (new Operations().save(toInsert))
+//        {
+//            System.out.println("Ok");
+//        } else
+//        {
+//            System.out.println("Nok");
+//        }
     }
 }

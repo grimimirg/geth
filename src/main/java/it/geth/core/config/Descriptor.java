@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -23,6 +21,7 @@ public class Descriptor
     private List<Class> annotatedClasses = new ArrayList<>();
     private List<String> modules = new ArrayList<>();
     private int socket = 60001;
+    private boolean serverUp = false;
 
     /**
      *
@@ -142,6 +141,24 @@ public class Descriptor
     public void setSocket(int socket)
     {
         this.socket = socket;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public boolean isServerUp()
+    {
+        return serverUp;
+    }
+
+    /**
+     *
+     * @param serverUp
+     */
+    public void setServerUp(boolean serverUp)
+    {
+        this.serverUp = serverUp;
     }
 
 }
