@@ -26,7 +26,7 @@ public class AwesomeThings extends ModuleUtilities implements HttpHandler
         try {
             User user = new User();
             user.setUsername("ffrosky");
-            String json = new Operations().load(user).toJson();
+            String json = new Operations().loadWhere(user).toJson();
 
             exch.sendResponseHeaders(200, json.length());
             OutputStream os = exch.getResponseBody();

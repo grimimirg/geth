@@ -18,7 +18,7 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author agrimandi
  */
-public class Operations implements IOperations
+public class Operations
 {
 
     /**
@@ -36,17 +36,14 @@ public class Operations implements IOperations
      * @param toSave
      * @return
      */
-    @Override
     public boolean save(Object toSave) throws HibernateException
     {
-        try
-        {
+        try {
             this.session.beginTransaction();
             this.session.save(toSave);
             this.session.getTransaction().commit();
             return true;
-        } catch (HibernateException ex)
-        {
+        } catch (HibernateException ex) {
             ex.printStackTrace();
             return false;
         }
@@ -54,7 +51,7 @@ public class Operations implements IOperations
 
     /**
      * Perform a select from the database using the <b>toLoad getter methods</b>
-     * as the where conditions. For loading by id use the <b>loadById()</b>
+     * as the where conditions. For loading by id use the <b>loadWhereId()</b>
      * function instead.
      *
      * NB: <b>toLoad</b> must be annotated with <b>javax.persistence</b>
@@ -66,8 +63,7 @@ public class Operations implements IOperations
      * @throws InvocationTargetException
      * @throws IllegalAccessException
      */
-    @Override
-    public Outcome load(Object toLoad) throws IllegalArgumentException, InvocationTargetException, IllegalAccessException
+    public Outcome loadWhere(Object toLoad) throws IllegalArgumentException, InvocationTargetException, IllegalAccessException
     {
         this.session.beginTransaction();
 
@@ -75,14 +71,11 @@ public class Operations implements IOperations
 
         Method[] methods = toLoad.getClass().getMethods();
 
-        for (Method method : methods)
-        {
-            if (method.isAnnotationPresent(Column.class) && !method.isAnnotationPresent(Id.class))
-            {
+        for (Method method : methods) {
+            if (method.isAnnotationPresent(Column.class) && !method.isAnnotationPresent(Id.class)) {
                 Column column = method.getAnnotation(Column.class);
                 Object value = method.invoke(toLoad, (Object[]) null);
-                if (value != null)
-                {
+                if (value != null) {
                     criteria.add(Restrictions.eq(column.name(), value));
                 }
             }
@@ -93,7 +86,8 @@ public class Operations implements IOperations
 
     /**
      * Perform a select from the database using the <b>toLoad id getter</b>
-     * as the where conditions. For loading by other fields use <b>load()</b>
+     * as the where conditions. For loading by other fields use
+     * <b>loadWhere()</b>
      * function instead.
      *
      * NB: <b>toLoad</b> must be annotated with the <b>javax.persistence</b>
@@ -105,8 +99,7 @@ public class Operations implements IOperations
      * @throws InvocationTargetException
      * @throws IllegalAccessException
      */
-    @Override
-    public Outcome loadById(Object toLoad) throws IllegalArgumentException, InvocationTargetException, IllegalAccessException
+    public Outcome loadWhereId(Object toLoad) throws IllegalArgumentException, InvocationTargetException, IllegalAccessException
     {
         this.session.beginTransaction();
 
@@ -114,20 +107,27 @@ public class Operations implements IOperations
 
         Method[] methods = toLoad.getClass().getMethods();
 
-        for (Method method : methods)
-        {
-            if (method.isAnnotationPresent(Id.class))
-            {
+        for (Method method : methods) {
+            if (method.isAnnotationPresent(Id.class)) {
                 Column column = method.getAnnotation(Column.class);
                 Object value = method.invoke(toLoad, (Object[]) null);
-                if (value != null)
-                {
+                if (value != null) {
                     criteria.add(Restrictions.eq(column.name(), value));
                 }
             }
         }
 
         return new Outcome(criteria.list());
+    }
+
+    /**
+     *
+     * @param toLoad
+     * @return
+     */
+    public Outcome loadAll(Class toLoad)
+    {
+        return new Outcome(this.session.createQuery("from " + toLoad.getName()).list());
     }
 
 }

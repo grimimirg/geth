@@ -6,6 +6,8 @@
 package it.geth.test;
 
 import it.geth.core.ApplicationContext;
+import it.geth.core.RestHandler;
+import it.geth.core.SingleHttpServer;
 import it.geth.core.db.Operations;
 import java.lang.reflect.InvocationTargetException;
 
@@ -28,7 +30,7 @@ public class MainTest
 
         User user = new User();
         user.setUsername("ffrosky");
-        String json = new Operations().load(user).toJson();
+        String json = new Operations().loadWhere(user).toJson();
         System.out.println(json);
 
 //        User toInsert = new User();
