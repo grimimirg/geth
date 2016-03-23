@@ -5,6 +5,7 @@
  */
 package it.geth.core.config;
 
+import com.sun.net.httpserver.HttpHandler;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,9 +20,12 @@ public class Descriptor
 
     private Map<String, String> params = new HashMap<>();
     private List<Class> annotatedClasses = new ArrayList<>();
-    private List<String> modules = new ArrayList<>();
+
     private int socket = 60001;
     private boolean serverUp = false;
+
+    private List<String> classHandlers = new ArrayList<>();
+    private List<HttpHandler> handlers = new ArrayList<>();
 
     /**
      *
@@ -66,7 +70,7 @@ public class Descriptor
      */
     public Map<String, String> getParams()
     {
-        return params;
+        return this.params;
     }
 
     /**
@@ -75,7 +79,7 @@ public class Descriptor
      */
     public List<Class> getAnnotatedClasses()
     {
-        return annotatedClasses;
+        return this.annotatedClasses;
     }
 
     /**
@@ -85,7 +89,7 @@ public class Descriptor
      */
     public Object getParam(String key)
     {
-        return params.get(key);
+        return this.params.get(key);
     }
 
     /**
@@ -95,25 +99,34 @@ public class Descriptor
      */
     public Class getAnnotatedClass(int index)
     {
-        return annotatedClasses.get(index);
+        return this.annotatedClasses.get(index);
     }
 
     /**
      *
      * @return
      */
-    public List<String> getModules()
+    public List<String> getClassHandlers()
     {
-        return modules;
+        return this.classHandlers;
     }
 
     /**
      *
-     * @param modules
+     * @return
      */
-    public void setModules(List<String> modules)
+    public List<HttpHandler> getHandlers()
     {
-        this.modules = modules;
+        return this.handlers;
+    }
+
+    /**
+     *
+     * @param classHandlers
+     */
+    public void setClassHandlers(List<String> classHandlers)
+    {
+        this.classHandlers = classHandlers;
     }
 
     /**
@@ -122,7 +135,25 @@ public class Descriptor
      */
     public void addModule(String cls)
     {
-        this.modules.add(cls);
+        this.classHandlers.add(cls);
+    }
+
+    /**
+     *
+     * @param handlers
+     */
+    public void setHandlers(List<HttpHandler> handlers)
+    {
+        this.handlers = handlers;
+    }
+
+    /**
+     *
+     * @param handler
+     */
+    public void addModule(HttpHandler handler)
+    {
+        this.handlers.add(handler);
     }
 
     /**
@@ -131,7 +162,7 @@ public class Descriptor
      */
     public int getSocket()
     {
-        return socket;
+        return this.socket;
     }
 
     /**
@@ -149,7 +180,7 @@ public class Descriptor
      */
     public boolean isServerUp()
     {
-        return serverUp;
+        return this.serverUp;
     }
 
     /**

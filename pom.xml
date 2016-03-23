@@ -52,7 +52,7 @@
             <groupId>ModularServer</groupId>
             <scope>system</scope>
             <version>1.0</version>
-            <systemPath>/home/agrimandi/Desktop/projects/lib/ModularServer-1.0.jar</systemPath>
+            <systemPath>/home/agrimandi/Desktop/projects/ModularServer/target/ModularServer-1.1.jar</systemPath>
         </dependency>
         
         <!-- TEST -->
