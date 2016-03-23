@@ -3,11 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package it.geth.test;
+package it.geth.test.configurations;
 
+import it.geth.test.model.User;
 import it.geth.core.MainAdapter;
 import it.geth.core.config.Descriptor;
 import it.geth.core.config.annotation.ConfigurationAdapter;
+import it.geth.test.AwesomeThings;
 
 /**
  *

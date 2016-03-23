@@ -1,5 +1,6 @@
 package it.geth.test;
 
+import it.geth.test.model.User;
 import java.io.IOException;
 import java.io.OutputStream;
 

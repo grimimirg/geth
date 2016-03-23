@@ -5,6 +5,7 @@
  */
 package it.geth.test;
 
+import it.geth.test.model.User;
 import it.geth.core.ApplicationContext;
 import it.geth.core.RestHandler;
 import it.geth.core.SingleHttpServer;
