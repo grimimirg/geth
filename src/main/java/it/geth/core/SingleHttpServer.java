@@ -33,6 +33,7 @@ public class SingleHttpServer
                 MODULAR_SERVER = new ModularServer(descriptor.getSocket());
                 MODULAR_SERVER.setClassHandlers(descriptor.getClassHandlers());
                 MODULAR_SERVER.setHandlers(descriptor.getHandlers());
+                MODULAR_SERVER.build();
 
                 return MODULAR_SERVER;
             }

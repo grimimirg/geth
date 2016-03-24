@@ -23,7 +23,6 @@ public class AwesomeThings extends ModuleUtilities implements HttpHandler
     @Override
     public void handle(HttpExchange exch) throws IOException
     {
-
         try {
             User user = new User();
             user.setUsername("ffrosky");

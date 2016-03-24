@@ -36,6 +36,7 @@ public class Configurations extends MainAdapter
         descriptor.setServerUp(true);
         descriptor.setSocket(60001);
 
+//        descriptor.addModule(AwesomeThings.class.getName());
         descriptor.addModule(AwesomeThings.class.getName());
     }
 

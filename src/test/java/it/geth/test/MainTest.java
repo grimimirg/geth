@@ -9,7 +9,6 @@ import it.geth.test.model.User;
 import it.geth.core.ApplicationContext;
 import it.geth.core.RestHandler;
 import it.geth.core.SingleHttpServer;
-import it.geth.core.db.Operations;
 import java.lang.reflect.InvocationTargetException;
 
 /**
@@ -31,8 +30,8 @@ public class MainTest
 
         User user = new User();
         user.setUsername("ffrosky");
-        String json = new Operations().loadWhere(user).toJson();
-        System.out.println(json);
+//        String json = new Operations().loadWhere(user).toJson();
+//        System.out.println(json);
         SingleHttpServer.getCurrentInstance().addModule(new RestHandler(user));
 
 //        User toInsert = new User();
