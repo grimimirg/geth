@@ -19,13 +19,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>3.6.3.Final</version>
-        </dependency> 
-        
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <version>4.3.1.Final</version>
+            <version>5.1.0.Final</version>
         </dependency>
         
         <dependency>
@@ -58,7 +52,7 @@
             <groupId>ModularServer</groupId>
             <scope>system</scope>
             <version>1.0</version>
-            <systemPath>C:\NSI\_progetti\NetBeansWorkspace\modular-server\target\ModularServer-1.1.jar</systemPath>
+            <systemPath>/home/agrimandi/Desktop/projects/ModularServer/target/ModularServer-1.1.jar</systemPath>
         </dependency>
         
         <!-- TEST -->
