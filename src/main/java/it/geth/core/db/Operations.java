@@ -12,6 +12,7 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -24,7 +25,7 @@ public class Operations
     /**
      *
      */
-    private final DelegateSession session = new DelegateSession(SingleSessionFactory.getCurrentInstance().getCurrentSession());
+    private final Session session = SingleSessionFactory.getCurrentInstance().getCurrentSession();
 
     /**
      * Save an object into the database using the <b>toSave.getClass()</b> as
@@ -38,12 +39,14 @@ public class Operations
      */
     public boolean save(Object toSave) throws HibernateException
     {
-        try {
+        try
+        {
             this.session.beginTransaction();
             this.session.save(toSave);
             this.session.getTransaction().commit();
             return true;
-        } catch (HibernateException ex) {
+        } catch (HibernateException ex)
+        {
             ex.printStackTrace();
             return false;
         }
@@ -71,11 +74,14 @@ public class Operations
 
         Method[] methods = toLoad.getClass().getMethods();
 
-        for (Method method : methods) {
-            if (method.isAnnotationPresent(Column.class) && !method.isAnnotationPresent(Id.class)) {
+        for (Method method : methods)
+        {
+            if (method.isAnnotationPresent(Column.class) && !method.isAnnotationPresent(Id.class))
+            {
                 Column column = method.getAnnotation(Column.class);
                 Object value = method.invoke(toLoad, (Object[]) null);
-                if (value != null) {
+                if (value != null)
+                {
                     criteria.add(Restrictions.eq(column.name(), value));
                 }
             }
@@ -107,11 +113,14 @@ public class Operations
 
         Method[] methods = toLoad.getClass().getMethods();
 
-        for (Method method : methods) {
-            if (method.isAnnotationPresent(Id.class)) {
+        for (Method method : methods)
+        {
+            if (method.isAnnotationPresent(Id.class))
+            {
                 Column column = method.getAnnotation(Column.class);
                 Object value = method.invoke(toLoad, (Object[]) null);
-                if (value != null) {
+                if (value != null)
+                {
                     criteria.add(Restrictions.eq(column.name(), value));
                 }
             }
