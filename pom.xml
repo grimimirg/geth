@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>it.geth</groupId>
     <artifactId>Geth</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.2</version>
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -28,6 +28,12 @@
             <version>4.3.1.Final</version>
         </dependency>
         
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>5.2.4.Final</version>
+        </dependency>
+
         <!-- reflection -->
         
         <dependency>
@@ -52,7 +58,7 @@
             <groupId>ModularServer</groupId>
             <scope>system</scope>
             <version>1.0</version>
-            <systemPath>/home/agrimandi/Desktop/projects/ModularServer/target/ModularServer-1.1.jar</systemPath>
+            <systemPath>C:\NSI\_progetti\NetBeansWorkspace\modular-server\target\ModularServer-1.1.jar</systemPath>
         </dependency>
         
         <!-- TEST -->
@@ -65,9 +71,11 @@
             <version>9.1-901-1.jdbc4</version>
         </dependency>
         <dependency>
-            <groupId>it.grimi.babel</groupId>
-            <artifactId>HTTPServerBase</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>7.0</version>
+            <scope>test</scope>
+            <type>jar</type>
         </dependency>
     </dependencies>
     

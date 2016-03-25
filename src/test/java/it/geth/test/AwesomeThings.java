@@ -23,18 +23,23 @@ public class AwesomeThings extends ModuleUtilities implements HttpHandler
     @Override
     public void handle(HttpExchange exch) throws IOException
     {
-        try {
-            User user = new User();
-            user.setUsername("ffrosky");
-            String json = new Operations().loadWhere(user).toJson();
+        String json = "<h1>AND HIS NAME IS JOHN CENA!</h1>";
 
-            exch.sendResponseHeaders(200, json.length());
-            OutputStream os = exch.getResponseBody();
-            os.write(json.getBytes());
-            os.close();
-        } catch (IllegalArgumentException | InvocationTargetException | IllegalAccessException ex) {
+        try
+        {
+            User user = new User();
+            user.setUsername("pciffoli");
+            json = new Operations().loadWhere(user).toJson();
+
+        } catch (IllegalArgumentException | InvocationTargetException | IllegalAccessException ex)
+        {
             Logger.getLogger(AwesomeThings.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        exch.sendResponseHeaders(200, json.length());
+        OutputStream os = exch.getResponseBody();
+        os.write(json.getBytes());
+        os.close();
     }
 
 }
