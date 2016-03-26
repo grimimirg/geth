@@ -24,12 +24,28 @@ public class RestHandler extends ModuleUtilities implements HttpHandler
 
     private Object entity = null;
 
+    /**
+     *
+     * @param entity
+     */
     public RestHandler(Object entity)
     {
         this.entity = entity;
-        SingleHttpServer.getCurrentInstance().addModule(this.getClass().getName());
+
+        try {
+            SingleHttpServer.getCurrentInstance().addModule(this.getClass().getName());
+        } catch (Exception ex) {
+            System.out.printf("HTTP Server must be started in order to add new modules. See configurations in your MainAdapter class\n");
+            Logger.getLogger(RestHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
+    /**
+     *
+     * @param exch
+     * @throws IOException
+     */
     @Override
     public void handle(HttpExchange exch) throws IOException
     {

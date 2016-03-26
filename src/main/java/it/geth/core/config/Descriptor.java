@@ -21,7 +21,7 @@ public class Descriptor
     private Map<String, String> params = new HashMap<>();
     private List<Class> annotatedClasses = new ArrayList<>();
 
-    private int socket = 60001;
+    private int socket = 59997;
     private boolean serverUp = false;
 
     private List<String> classHandlers = new ArrayList<>();

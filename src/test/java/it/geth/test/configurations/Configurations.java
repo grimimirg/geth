@@ -26,7 +26,7 @@ public class Configurations extends MainAdapter
         descriptor.addProperty("hibernate.connection.driver_class", "org.postgresql.Driver");
         descriptor.addProperty("hibernate.connection.url", "jdbc:postgresql://127.0.0.1:5432/postgres");
         descriptor.addProperty("hibernate.connection.username", "postgres");
-        descriptor.addProperty("hibernate.connection.password", "tette123");
+        descriptor.addProperty("hibernate.connection.password", "postgres");
         descriptor.addProperty("hibernate.current_session_context_class", "thread");
         descriptor.addProperty("show_sql", "true");
         descriptor.addProperty("format_sql", "true");
@@ -34,7 +34,7 @@ public class Configurations extends MainAdapter
         descriptor.addAnnotatedClass(User.class);
 
         descriptor.setServerUp(true);
-        descriptor.setSocket(60001);
+//        descriptor.setSocket(60001);
 
         descriptor.addModule(AwesomeThings.class.getName());
     }
