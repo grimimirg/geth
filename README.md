@@ -75,6 +75,13 @@ model.setMyProperty("something");
 SingleHttpServer.getCurrentInstance().addModule(new RestHandler(model));
 ```
 
+##Dependencies
+
+...some external libraries are currently delaying this delivery...
+
+
+
+
 This software is distributed under the <a href="http://www.wtfpl.net/"><img
        src="http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-4.png"
        width="80" height="15" alt="WTFPL" /></a> license. <b>Have fun!</b>
