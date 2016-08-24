@@ -15,6 +15,9 @@ import it.geth.core.config.annotation.Configurations;
 public abstract class MainAdapter
 {
 
+    /**
+     * Any Geth configurations
+     */
     private final Descriptor descriptor = new Descriptor();
 
     /**

@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * Wrapper for Geth application parameters.
  *
  * @author agrimandi
  */

@@ -31,6 +31,7 @@ public class SingleSessionFactory
             {
                 Configuration configuration = new Configuration();
 
+                //#region(hibernate configuration)
                 for (Map.Entry<String, String> entry : descriptor.getParams().entrySet())
                 {
                     configuration.setProperty(entry.getKey(), entry.getValue());
@@ -41,6 +42,12 @@ public class SingleSessionFactory
                     configuration.addAnnotatedClass(annotatedClass);
                 }
 
+                //#end_region
+                
+                //#region(hypotetically, anything related to geth or anything else...)
+                
+                //#end_region
+                
                 try
                 {
                     SESSION_FACTORY = configuration.buildSessionFactory();

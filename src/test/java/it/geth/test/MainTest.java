@@ -31,9 +31,12 @@ public class MainTest
 
         User user = new User();
         user.setUsername("pciffoli");
+        
 //        String json = new Operations().loadWhere(user).toJson();
 //        System.out.println(json);
+
         SingleHttpServer.getCurrentInstance().addModule(new RestHandler(user));
+        
 //        User toInsert = new User();
 //        toInsert.setName("pipitou");
 //        toInsert.setSurname("ciffoli");

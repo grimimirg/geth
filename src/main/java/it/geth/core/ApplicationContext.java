@@ -32,12 +32,14 @@ public class ApplicationContext
 
     /**
      *
+     *
      * @param rootContext
      */
     protected ApplicationContext(String rootContext)
     {
         ApplicationContext.rootContext = rootContext;
 
+        //recursively searches which are the ConfigurationAdapter classes.
         Reflections rootScope = new Reflections(ApplicationContext.rootContext);
         Set<Class<?>> adapters = rootScope.getTypesAnnotatedWith(ConfigurationAdapter.class);
 
@@ -53,6 +55,7 @@ public class ApplicationContext
 
                 for (Method method : databaseAdapterMethods)
                 {
+                    //will invoke configureDatabaseAdapter() and build sessionFactory() and httpServer
                     if (method.isAnnotationPresent(Configurations.class))
                     {
                         method.invoke(configurationAdapter, null);
