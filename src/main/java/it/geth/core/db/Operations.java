@@ -25,7 +25,7 @@ public class Operations
     /**
      *
      */
-    private final Session session = SingleSessionFactory.getCurrentInstance().getCurrentSession();
+    private final Session session = SingleSessionFactory.buildInstance(null).getCurrentSession();
 
     /**
      * Save an object into the database using the <b>toSave.getClass()</b> as

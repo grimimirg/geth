@@ -29,7 +29,8 @@ public class SingleHttpServer
          */
         private static ModularServer build(Descriptor descriptor)
         {
-            if (MODULAR_SERVER == null) {
+            if (MODULAR_SERVER == null)
+            {
                 MODULAR_SERVER = new ModularServer(descriptor.getSocket());
                 MODULAR_SERVER.setClassHandlers(descriptor.getClassHandlers());
                 MODULAR_SERVER.setHandlers(descriptor.getHandlers());
@@ -37,6 +38,7 @@ public class SingleHttpServer
 
                 return MODULAR_SERVER;
             }
+
             return MODULAR_SERVER;
         }
 
@@ -57,9 +59,11 @@ public class SingleHttpServer
      */
     public static ModularServer buildInstance(Descriptor descriptor)
     {
-        if (descriptor.isServerUp()) {
+        if (descriptor.isServerUp())
+        {
             return SingleHttpServerHelper.build(descriptor).start();
-        } else {
+        } else
+        {
             return null;
         }
     }
