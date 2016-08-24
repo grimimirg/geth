@@ -20,7 +20,7 @@ We are "geth-ing" ready this project for easy-to-use interactions between databa
 ## How to use?
 (see /test folder for a complete working example with postgres)
 
-1. Have a nice configuration 
+1) Have a nice configuration 
 
 ```java
 @ConfigurationAdapter
@@ -46,13 +46,13 @@ public class Configurations extends MainAdapter
 }
 ```
 
-2. Build your application context
+2) Build your application context
 
 ```java
 ApplicationContext.buildContext("it.geth.test");
 ```
 
-3. Deal with it
+3) Deal with it
 
 ```java
 MyModel model = new MyModel();
