@@ -49,7 +49,7 @@ public class Configurations extends MainAdapter
 2) Build your application context
 
 ```java
-ApplicationContext.buildContext("it.geth.test");
+ApplicationContext.buildContext("application.root.package");
 ```
 
 3) Deal with it
@@ -61,7 +61,7 @@ String json = new Operations().loadWhere(model).toJson();
 System.out.println(json);
 ```
 
-Exposing APIs
+###Exposing APIs
 
 ```java
 SingleHttpServer.getCurrentInstance().addModule(new RestHandler(MyModel.class));
