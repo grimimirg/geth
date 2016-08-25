@@ -39,8 +39,9 @@ public class MainTest
 //                .toJson();
         String result = new Operations().loadFromDb(Stuff.class)
                 .addCriteria(
-                        Cryterion.and(
-                                Cryterion.gt("number", 12)
+                        Cryterion.or(
+                                Cryterion.gt("number", 12),
+                                Cryterion.eq("number", 10)
                         )
                 )
                 .execute().toJson();
