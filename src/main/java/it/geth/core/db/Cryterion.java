@@ -26,4 +26,35 @@ public class Cryterion
         return Restrictions.gt(field, value);
     }
 
+    /**
+     *
+     * @param field
+     * @param value
+     * @return
+     */
+    public static Criterion eq(String field, Object value)
+    {
+        return Restrictions.eq(field, value);
+    }
+
+    /**
+     *
+     * @param predicate
+     * @return
+     */
+    public static Criterion or(Criterion... predicate)
+    {
+        return Restrictions.or(predicate);
+    }
+
+    /**
+     *
+     * @param predicate
+     * @return
+     */
+    public static Criterion and(Criterion... predicate)
+    {
+        return Restrictions.and(predicate);
+    }
+
 }

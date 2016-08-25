@@ -28,20 +28,13 @@ public class Cryteria
      * @param predicate
      * @return
      */
-    public Cryteria or(Criterion predicate)
+    public Cryteria addCriteria(Criterion... predicate)
     {
-        this.criteria.add(Restrictions.or(predicate));
-        return this;
-    }
+        for (Criterion criteria : predicate)
+        {
+            this.criteria.add(Restrictions.and(criteria));
+        }
 
-    /**
-     *
-     * @param predicate
-     * @return
-     */
-    public Cryteria and(Criterion predicate)
-    {
-        this.criteria.add(Restrictions.and(predicate));
         return this;
     }
 

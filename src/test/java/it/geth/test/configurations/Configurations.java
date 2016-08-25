@@ -10,6 +10,7 @@ import it.geth.core.MainAdapter;
 import it.geth.core.config.Descriptor;
 import it.geth.core.config.annotation.ConfigurationAdapter;
 import it.geth.test.AwesomeThings;
+import it.geth.test.model.Stuff;
 
 /**
  *
@@ -26,17 +27,17 @@ public class Configurations extends MainAdapter
         descriptor.addProperty("hibernate.connection.driver_class", "org.postgresql.Driver");
         descriptor.addProperty("hibernate.connection.url", "jdbc:postgresql://127.0.0.1:5432/postgres");
         descriptor.addProperty("hibernate.connection.username", "postgres");
-        descriptor.addProperty("hibernate.connection.password", "postgres");
+        descriptor.addProperty("hibernate.connection.password", "tette123");
         descriptor.addProperty("hibernate.current_session_context_class", "thread");
         descriptor.addProperty("show_sql", "true");
         descriptor.addProperty("format_sql", "true");
 
-        descriptor.addAnnotatedClass(User.class);
+        descriptor.addAnnotatedClass(Stuff.class);
 
-        descriptor.setServerUp(true);
+//        descriptor.addAnnotatedClass(User.class);
+//        descriptor.setServerUp(true);
 //        descriptor.setSocket(60001);
-
-        descriptor.addModule(AwesomeThings.class.getName());
+//        descriptor.addModule(AwesomeThings.class.getName());
     }
 
 }

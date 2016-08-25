@@ -11,6 +11,7 @@ import it.geth.core.RestHandler;
 import it.geth.core.SingleHttpServer;
 import it.geth.core.db.Cryterion;
 import it.geth.core.db.Operations;
+import it.geth.test.model.Stuff;
 import java.lang.reflect.InvocationTargetException;
 
 /**
@@ -30,34 +31,43 @@ public class MainTest
     {
         ApplicationContext.buildContext("it.geth.test");
 
-        //SELECT * FROM USER where SOMETHING > 12
-        String result = new Operations()
-                .loadFromDb(User.class)
-                .and(Cryterion.gt("something", 12))
-                .execute()
-                .toJson();
+//        //SELECT * FROM USER where SOMETHING > 12
+//        String result = new Operations()
+//                .loadFromDb(User.class)
+//                .and(Cryterion.gt("something", 12))
+//                .execute()
+//                .toJson();
+        String result = new Operations().loadFromDb(Stuff.class)
+                .addCriteria(
+                        Cryterion.and(
+                                Cryterion.gt("number", 12)
+                        )
+                )
+                .execute().toJson();
 
-        // SELECT * from USER where USERNAME = 'pciffoli'
-        User user = new User();
-        user.setUsername("pciffoli");
-        String json = new Operations().loadWhere(user).toJson();
+        System.out.println(result);
 
-        // Exposing through API
-        SingleHttpServer.getCurrentInstance().addModule(new RestHandler(user));
-
-        // INSERT INTO USER
-        User toInsert = new User();
-        toInsert.setName("pipitou");
-        toInsert.setSurname("ciffoli");
-        toInsert.setUsername("pciffoli");
-        toInsert.setPassword("123456");
-
-        if (new Operations().save(toInsert))
-        {
-            System.out.println("Ok");
-        } else
-        {
-            System.out.println("Nok");
-        }
+//        // SELECT * from USER where USERNAME = 'pciffoli'
+//        User user = new User();
+//        user.setUsername("pciffoli");
+//        String json = new Operations().loadWhere(user).toJson();
+//
+//        // Exposing through API
+//        SingleHttpServer.getCurrentInstance().addModule(new RestHandler(user));
+//
+//        // INSERT INTO USER
+//        User toInsert = new User();
+//        toInsert.setName("pipitou");
+//        toInsert.setSurname("ciffoli");
+//        toInsert.setUsername("pciffoli");
+//        toInsert.setPassword("123456");
+//
+//        if (new Operations().save(toInsert))
+//        {
+//            System.out.println("Ok");
+//        } else
+//        {
+//            System.out.println("Nok");
+//        }
     }
 }

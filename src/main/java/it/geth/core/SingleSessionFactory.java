@@ -2,7 +2,6 @@ package it.geth.core;
 
 import it.geth.core.config.Descriptor;
 import java.util.Map;
-import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 

@@ -135,6 +135,7 @@ public class Operations
      */
     public Outcome loadAll(Class toLoad)
     {
+        this.session.beginTransaction();
         return new Outcome(this.session.createQuery("from " + toLoad.getName()).list());
     }
 
@@ -145,6 +146,7 @@ public class Operations
      */
     public Cryteria loadFromDb(Class toLoad)
     {
+        this.session.beginTransaction();
         return new Cryteria(this.session.createCriteria(toLoad));
     }
 
