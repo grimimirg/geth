@@ -43,18 +43,10 @@ public class SingleSessionFactory
                 }
 
                 //#end_region
-                
-                //#region(hypotetically, anything related to geth or anything else...)
-                
+                //#region(anything related to geth or something else...)
                 //#end_region
-                
-                try
-                {
-                    SESSION_FACTORY = configuration.buildSessionFactory();
-                } catch (HibernateException ex)
-                {
-                    ex.printStackTrace();
-                }
+                SESSION_FACTORY = configuration.buildSessionFactory();
+
             }
             return SESSION_FACTORY;
         }

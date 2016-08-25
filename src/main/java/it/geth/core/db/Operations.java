@@ -47,7 +47,6 @@ public class Operations
             return true;
         } catch (HibernateException ex)
         {
-            ex.printStackTrace();
             return false;
         }
     }
@@ -137,6 +136,16 @@ public class Operations
     public Outcome loadAll(Class toLoad)
     {
         return new Outcome(this.session.createQuery("from " + toLoad.getName()).list());
+    }
+
+    /**
+     *
+     * @param toLoad
+     * @return
+     */
+    public Cryteria loadFromDb(Class toLoad)
+    {
+        return new Cryteria(this.session.createCriteria(toLoad));
     }
 
 }
