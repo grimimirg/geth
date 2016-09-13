@@ -75,10 +75,16 @@ model.setMyProperty("something");
 SingleHttpServer.getCurrentInstance().addModule(new RestHandler(model));
 ```
 
+##What is not good at?
+
+DO NOT USE as your base model APIs! Of course, there are lots better frameworks than this "crappy".
+It has meant for a light and quick use. If you have to get ready the usual quick demo app, or you want to integrate
+your software with an external system, this could be the easiest way to do that.
+
+
 ##Dependencies
 
 ...some external libraries are currently delaying this delivery...
-
 
 
 
