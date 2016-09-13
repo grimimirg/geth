@@ -5,6 +5,8 @@
  */
 package it.geth.test.model;
 
+import it.geth.core.RestHandler;
+
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,7 +25,7 @@ import javax.persistence.UniqueConstraint;
 {
     @UniqueConstraint(columnNames = "id")
 })
-public class User implements Serializable
+public class User extends RestHandler implements Serializable
 {
 
     private long id;
@@ -34,6 +36,7 @@ public class User implements Serializable
 
     public User()
     {
+
     }
 
     public User(String username, String password, String name, String surname)

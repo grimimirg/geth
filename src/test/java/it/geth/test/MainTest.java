@@ -31,13 +31,23 @@ public class MainTest
     {
         ApplicationContext.buildContext("it.geth.test");
 
-//        //SELECT * FROM USER where SOMETHING > 12
-//        String result = new Operations()
-//                .loadFromDb(User.class)
-//                .and(Cryterion.gt("something", 12))
-//                .execute()
-//                .toJson();
-        String result = new Operations().loadFromDb(Stuff.class)
+        // INSERT
+        User toInsert = new User();
+        toInsert.setName("pipitou");
+        toInsert.setSurname("ciffoli");
+        toInsert.setUsername("pciffoli");
+        toInsert.setPassword("123456");
+
+        if (new Operations().save(toInsert))
+        {
+            System.out.println("Ok");
+        } else
+        {
+            System.out.println("Nok");
+        }
+
+        //Way 1 SELECT
+        String result = new Operations().load(Stuff.class)
                 .addCriteria(
                         Cryterion.or(
                                 Cryterion.gt("number", 12),
@@ -48,27 +58,13 @@ public class MainTest
 
         System.out.println(result);
 
-//        // SELECT * from USER where USERNAME = 'pciffoli'
-//        User user = new User();
-//        user.setUsername("pciffoli");
-//        String json = new Operations().loadWhere(user).toJson();
-//
-//        // Exposing through API
-//        SingleHttpServer.getCurrentInstance().addModule(new RestHandler(user));
-//
-//        // INSERT INTO USER
-//        User toInsert = new User();
-//        toInsert.setName("pipitou");
-//        toInsert.setSurname("ciffoli");
-//        toInsert.setUsername("pciffoli");
-//        toInsert.setPassword("123456");
-//
-//        if (new Operations().save(toInsert))
-//        {
-//            System.out.println("Ok");
-//        } else
-//        {
-//            System.out.println("Nok");
-//        }
+        //Way 2 SELECT API
+        SingleHttpServer.getCurrentInstance().addModule(new User().expose(User.class));
+
+        //Way 3 SELECT API
+        User user = new User();
+        user.setUsername("pciffoli");
+        SingleHttpServer.getCurrentInstance().addModule(user.expose(user));
+
     }
 }

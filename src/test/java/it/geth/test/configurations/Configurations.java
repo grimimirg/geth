@@ -9,7 +9,6 @@ import it.geth.test.model.User;
 import it.geth.core.MainAdapter;
 import it.geth.core.config.Descriptor;
 import it.geth.core.config.annotation.ConfigurationAdapter;
-import it.geth.test.AwesomeThings;
 import it.geth.test.model.Stuff;
 
 /**
@@ -33,11 +32,10 @@ public class Configurations extends MainAdapter
         descriptor.addProperty("format_sql", "true");
 
         descriptor.addAnnotatedClass(Stuff.class);
+        descriptor.addAnnotatedClass(User.class);
 
-//        descriptor.addAnnotatedClass(User.class);
-//        descriptor.setServerUp(true);
-//        descriptor.setSocket(60001);
-//        descriptor.addModule(AwesomeThings.class.getName());
+        /*descriptor.setServerUp(true);
+        descriptor.setSocket(60001);*/
     }
 
 }

@@ -12,6 +12,8 @@ import it.grimi.modularserver.core.ModuleUtilities;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,19 +28,20 @@ public class RestHandler extends ModuleUtilities implements HttpHandler
 
     /**
      *
+     */
+    public RestHandler()
+    {
+
+    }
+
+    /**
+     *
      * @param entity
      */
-    public RestHandler(Object entity)
+    public RestHandler expose(Object entity)
     {
         this.entity = entity;
-
-        try {
-            SingleHttpServer.getCurrentInstance().addModule(this.getClass().getName());
-        } catch (Exception ex) {
-            System.out.printf("HTTP Server must be started in order to add new modules. See configurations in your MainAdapter class\n");
-            Logger.getLogger(RestHandler.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        return this;
     }
 
     /**
@@ -49,21 +52,64 @@ public class RestHandler extends ModuleUtilities implements HttpHandler
     @Override
     public void handle(HttpExchange exch) throws IOException
     {
-        String json = null;
-        if (this.entity instanceof Class) {
-            json = new Operations().loadAll((Class) this.entity).toJson();
-        } else {
-            try {
-                json = new Operations().loadWhere(this.entity).toJson();
-            } catch (IllegalArgumentException | InvocationTargetException | IllegalAccessException ex) {
-                Logger.getLogger(RestHandler.class.getName()).log(Level.SEVERE, null, ex);
+        String response = null;
+        int httpCode = 200;
+
+        if(this.entity != null)
+        {
+            if (this.entity instanceof Class)
+            {
+                Map<String, String> reqParams = this.getParams(exch.getRequestURI().getQuery());
+                if (reqParams.size() == 0)
+                {
+                    response = new Operations().loadAll((Class) this.entity).toJson();
+                } else
+                {
+                    try
+                    {
+                        Object obj = this.entity.getClass().newInstance();
+
+                        for (Map.Entry<String, String> entry : reqParams.entrySet())
+                        {
+                            for (Method method : this.entity.getClass().getDeclaredMethods())
+                            {
+                                if (method.getName().toLowerCase().equals("set" + entry.getKey()))
+                                {
+                                    method.invoke(null, entry.getValue());
+                                }
+                            }
+                        }
+
+                        response = new Operations().loadWhere(obj).toJson();
+                    } catch (Exception ex)
+                    {
+                        Logger.getLogger(RestHandler.class.getName()).log(Level.SEVERE, null, ex);
+                        response = ex.getMessage();
+                        httpCode = 500;
+                    }
+                }
+
+            } else
+            {
+                try
+                {
+                    response = new Operations().loadWhere(this.entity).toJson();
+                } catch (IllegalArgumentException | InvocationTargetException | IllegalAccessException ex)
+                {
+                    Logger.getLogger(RestHandler.class.getName()).log(Level.SEVERE, null, ex);
+                    response = ex.getMessage();
+                    httpCode = 500;
+                }
             }
+        } else
+        {
+            response = "";
+            httpCode = 500;
         }
 
-        exch.sendResponseHeaders(200, json.length());
-        OutputStream os = exch.getResponseBody();
-        os.write(json.getBytes());
-        os.close();
+        exch.sendResponseHeaders(httpCode, response.length());
+        OutputStream outputStream = exch.getResponseBody();
+        outputStream.write(response.getBytes());
+        outputStream.close();
     }
-
 }
