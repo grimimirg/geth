@@ -144,7 +144,7 @@ public class Operations
      * @param toLoad
      * @return
      */
-    public Cryteria loadFromDb(Class toLoad)
+    public Cryteria load(Class toLoad)
     {
         this.session.beginTransaction();
         return new Cryteria(this.session.createCriteria(toLoad));
